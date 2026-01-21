@@ -2,8 +2,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 const StatCard = ({
-    icon,
-    colorClass,
+    icon, 
     iconColorClass,
     label,
     value,

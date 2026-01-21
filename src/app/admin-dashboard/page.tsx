@@ -9,7 +9,7 @@ export default function Dashboard() {
     return (
         <div className="flex h-screen w-full overflow-hidden bg-background text-foreground font-sans">
             {/* Sidebar - Desktop */}
-            <Sidebar className="hidden md:flex w-64 flex-shrink-0 transition-all duration-300" />
+            <Sidebar className="hidden md:flex w-64 shrink-0 transition-all duration-300" />
 
             {/* Main Content */}
             <main className="flex-1 flex flex-col h-full overflow-y-auto bg-background relative scroll-smooth">

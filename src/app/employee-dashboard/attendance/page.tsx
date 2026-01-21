@@ -1,8 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react"; 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -11,8 +9,7 @@ export default function AttendancePage() {
     const streamRef = useRef<MediaStream | null>(null);
     const [hasPermission, setHasPermission] = useState<boolean | null>(null);
     const [isScanning, setIsScanning] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-    const router = useRouter();
+    const [isSuccess, setIsSuccess] = useState(false); 
 
     const stopCamera = () => {
         if (streamRef.current) {

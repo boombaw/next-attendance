@@ -122,16 +122,13 @@ export const ApprovalCard = ({ request, onApprove, onReject }: ApprovalCardProps
                     </div>
 
                     {/* Reason */}
-                    <div className="flex items-start gap-2 text-slate-600 dark:text-slate-400">
-                        <span className="material-symbols-outlined text-sm pt-0.5">info</span>
-                        <p className="text-sm">
-                            {request.type === "overtime" ? (
-                                <span className="italic">"{request.reason}"</span>
-                            ) : (
-                                `Alasan: ${request.reason}`
-                            )}
-                        </p>
-                    </div>
+                    <p className="text-sm">
+                        {request.type === "overtime" ? (
+                            <span className="italic">{"\""}{request.reason}{"\""}</span>
+                        ) : (
+                            `Alasan: ${request.reason}`
+                        )}
+                    </p>
                 </div>
 
                 {/* Action Buttons - Only show for pending requests */}

@@ -2,14 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
-import { RippleButton } from "@/components/ui/ripple-button";
+import { motion } from "framer-motion"; 
 import { useUser } from "@/contexts/user-context";
 import { ApprovalCard } from "./components/approval-card";
 import {
-    MOCK_APPROVALS,
-    getPendingApprovals,
-    getCompletedApprovals,
+    MOCK_APPROVALS, 
     ApprovalRequest
 } from "./data/mock-approvals";
 import { cn } from "@/lib/utils";

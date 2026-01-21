@@ -15,10 +15,10 @@ const baseServices = [
 
 export const ServicesGrid = () => {
     const router = useRouter();
-    const { isSupervisor } = useUser();
+    const { isSupervisor, isHydrated } = useUser();
 
-    // Add approval service for supervisors
-    const services = isSupervisor
+    // Add approval service for supervisors only after hydration to prevent mismatch
+    const services = isHydrated && isSupervisor
         ? [...baseServices, { icon: "task_alt", label: "Approval", delay: 0.9, href: "/employee-dashboard/approvals" }]
         : baseServices;
 
@@ -34,7 +34,7 @@ export const ServicesGrid = () => {
                 <h3 className="text-slate-900 dark:text-white text-lg font-bold">Layanan HR</h3>
             </div>
             <div className="grid grid-cols-4 gap-4">
-                {services.map((service, index) => (
+                {services.map((service) => (
                     <motion.div
                         key={service.label}
                         initial={{ opacity: 0, y: 20 }}

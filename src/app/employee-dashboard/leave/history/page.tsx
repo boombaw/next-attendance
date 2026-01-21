@@ -144,7 +144,7 @@ export default function LeaveHistoryPage() {
                                     <span className="material-symbols-outlined text-sm">calendar_month</span>
                                     <p className="text-sm font-normal">15 - 18 Jan 2026</p>
                                 </div>
-                                <p className="text-slate-600 dark:text-slate-300 text-sm mt-2 italic">"Liburan keluarga"</p>
+                                <p className="text-slate-600 dark:text-slate-300 text-sm mt-2 italic">Liburan keluarga</p>
                             </div>
                         </div>
                     </div>
@@ -163,7 +163,7 @@ export default function LeaveHistoryPage() {
                                     <span className="material-symbols-outlined text-sm">calendar_month</span>
                                     <p className="text-sm font-normal">02 Feb 2026</p>
                                 </div>
-                                <p className="text-slate-600 dark:text-slate-300 text-sm mt-2 italic">"Demam"</p>
+                                <p className="text-slate-600 dark:text-slate-300 text-sm mt-2 italic">Demam</p>
                             </div>
                         </div>
                     </div>
@@ -182,7 +182,7 @@ export default function LeaveHistoryPage() {
                                     <span className="material-symbols-outlined text-sm">calendar_month</span>
                                     <p className="text-sm font-normal">10 Dec 2025</p>
                                 </div>
-                                <p className="text-slate-600 dark:text-slate-300 text-sm mt-2 italic">"Acara keluarga"</p>
+                                <p className="text-slate-600 dark:text-slate-300 text-sm mt-2 italic">Acara keluarga</p>
                             </div>
                         </div>
                     </div>

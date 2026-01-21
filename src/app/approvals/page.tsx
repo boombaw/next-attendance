@@ -1,7 +1,6 @@
 import { Sidebar } from "@/components/sidebar";
 import { Header } from "@/components/header";
 import {
-    Search,
     Filter,
     Download,
     Hourglass,
@@ -10,13 +9,9 @@ import {
     Check,
     X,
     ChevronLeft,
-    ChevronRight,
-    Settings,
-    Bell
+    ChevronRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import {
     Table,
     TableBody,
@@ -84,7 +79,7 @@ export default function ApprovalsPage() {
     return (
         <div className="flex h-screen w-full overflow-hidden bg-[#f6f6f8] dark:bg-[#111621] text-gray-900 dark:text-gray-100 font-display">
             {/* Sidebar - Desktop */}
-            <Sidebar className="hidden md:flex w-64 flex-shrink-0 transition-all duration-300" />
+            <Sidebar className="hidden md:flex w-64 shrink-0 transition-all duration-300" />
 
             {/* Main Content */}
             <main className="flex-1 flex flex-col h-full relative overflow-hidden">

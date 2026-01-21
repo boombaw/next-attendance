@@ -3,7 +3,6 @@
 import { Sidebar } from "@/components/sidebar";
 import { Header } from "@/components/header";
 import { Search, Filter, Briefcase, Download, Plus, Check, ChevronsUpDown } from "lucide-react";
-import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -245,7 +244,7 @@ export default function EmployeesPage() {
                                     Employee Management
                                 </h2>
                                 <p className="text-gray-500 dark:text-gray-400 mt-1">
-                                    Manage your company's workforce roster and access.
+                                    Manage your company&apos;s workforce roster and access.
                                 </p>
                             </div>
                             <Button
@@ -738,7 +737,7 @@ export default function EmployeesPage() {
                     <AlertDialogHeader>
                         <AlertDialogTitle>Confirm Update</AlertDialogTitle>
                         <AlertDialogDescription>
-                            Are you sure you want to update this employee's details?
+                            Are you sure you want to update this employee&apos;s details?
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>

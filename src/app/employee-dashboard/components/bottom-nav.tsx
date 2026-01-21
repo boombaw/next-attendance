@@ -3,13 +3,11 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { RippleButton } from "@/components/ui/ripple-button";
-import { useUser } from "@/contexts/user-context";
+import { RippleButton } from "@/components/ui/ripple-button"; 
 import { cn } from "@/lib/utils";
 
 export const BottomNav = () => {
-    const pathname = usePathname();
-    const { isSupervisor } = useUser();
+    const pathname = usePathname(); 
 
     const isActive = (path: string) => {
         return pathname === path;
@@ -60,7 +58,7 @@ export const BottomNav = () => {
                 <Link href="/employee-dashboard/attendance" className="relative flex flex-col items-center justify-end h-full">
                     <div className="relative -top-6">
                         <RippleButton className="w-[4.5rem] h-[4.5rem] rounded-full bg-[#137fec] shadow-lg shadow-blue-500/40 flex items-center justify-center text-white border-[5px] border-[#f6f7f8] dark:border-[#101922]">
-                            <span className="material-symbols-outlined text-[36px]">fingerprint</span>
+                            <span className="material-symbols-outlined text-[36px]">filter_center_focus</span>
                         </RippleButton>
                     </div>
                     <span className="text-[10px] font-bold text-[#137fec] absolute">Absen</span>

@@ -118,7 +118,7 @@ export default function PermissionHistoryPage() {
                                     <span className="material-symbols-outlined text-sm">attach_file</span>
                                     <p className="text-sm font-normal text-[#137fec]">surat_dokter.pdf</p>
                                 </div>
-                                <p className="text-slate-600 dark:text-slate-300 text-sm mt-2 italic">"Demam tinggi"</p>
+                                <p className="text-slate-600 dark:text-slate-300 text-sm mt-2 italic">Demam tinggi</p>
                             </div>
                         </div>
                     </div>
@@ -137,7 +137,7 @@ export default function PermissionHistoryPage() {
                                     <span className="material-symbols-outlined text-sm">calendar_month</span>
                                     <p className="text-sm font-normal">20 Jan 2026</p>
                                 </div>
-                                <p className="text-slate-600 dark:text-slate-300 text-sm mt-2 italic">"Mengurus administrasi bank"</p>
+                                <p className="text-slate-600 dark:text-slate-300 text-sm mt-2 italic">Mengurus administrasi bank</p>
                             </div>
                         </div>
                     </div>
@@ -156,7 +156,7 @@ export default function PermissionHistoryPage() {
                                     <span className="material-symbols-outlined text-sm">calendar_month</span>
                                     <p className="text-sm font-normal">15 Dec 2025</p>
                                 </div>
-                                <p className="text-slate-600 dark:text-slate-300 text-sm mt-2 italic">"Keperluan mendesak"</p>
+                                <p className="text-slate-600 dark:text-slate-300 text-sm mt-2 italic">Keperluan mendesak</p>
                             </div>
                         </div>
                     </div>

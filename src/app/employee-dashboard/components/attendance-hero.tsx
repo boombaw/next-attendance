@@ -1,22 +1,30 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 
+// Store for time updates
+let currentTimeValue = new Date();
+const listeners = new Set<() => void>();
+
+const subscribe = (callback: () => void) => {
+    listeners.add(callback);
+    const interval = setInterval(() => {
+        currentTimeValue = new Date();
+        listeners.forEach((listener) => listener());
+    }, 1000);
+    return () => {
+        listeners.delete(callback);
+        clearInterval(interval);
+    };
+};
+
+const getSnapshot = () => currentTimeValue;
+const getServerSnapshot = () => null as Date | null;
+
 export const AttendanceHero = () => {
-    const [currentTime, setCurrentTime] = useState(new Date());
+    const currentTime = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-    useEffect(() => {
-        // Update jam setiap detik
-        const timer = setInterval(() => {
-            setCurrentTime(new Date());
-        }, 1000);
-
-        // Membersihkan interval saat komponen tidak lagi digunakan (unmount)
-        return () => clearInterval(timer);
-    }, []);
-
-    // Formatter untuk Tanggal (Contoh: Selasa, 13 Jan)
     const dateFormatter = new Intl.DateTimeFormat("id-ID", {
         weekday: "long",
         day: "numeric",
@@ -24,7 +32,6 @@ export const AttendanceHero = () => {
         year: "numeric",
     });
 
-    // Formatter untuk Jam (Contoh: 08:00:00)
     const timeFormatter = new Intl.DateTimeFormat("id-ID", {
         hour: "2-digit",
         minute: "2-digit",
@@ -54,10 +61,10 @@ export const AttendanceHero = () => {
                 <div className="flex justify-between items-start">
                     <div className="flex flex-col">
                         <span className="text-xs font-medium opacity-90 tracking-widest uppercase">
-                            {dateFormatter.format(currentTime)}
+                            {currentTime ? dateFormatter.format(currentTime) : "Memuat..."}
                         </span>
                         <span className="text-4xl font-bold tracking-tight mt-1 font-mono">
-                            {timeFormatter.format(currentTime)}
+                            {currentTime ? timeFormatter.format(currentTime) : "--:--:--"}
                         </span>
                     </div>
                     <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
