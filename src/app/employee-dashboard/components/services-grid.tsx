@@ -5,21 +5,23 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { RippleButton } from "@/components/ui/ripple-button";
 import { useUser } from "@/contexts/user-context";
-
-const baseServices = [
-    { icon: "event_busy", label: "Izin", delay: 0.5, href: "/employee-dashboard/permission" },
-    { icon: "history_toggle_off", label: "Lembur", delay: 0.6, href: "/employee-dashboard/overtime-request" },
-    { icon: "calendar_month", label: "Laporan", delay: 0.7, href: "/employee-dashboard/attendance-report" },
-    { icon: "beach_access", label: "Cuti", delay: 0.8, href: "/employee-dashboard/leave" },
-];
+import { useLanguage } from "@/lib/context/language-context";
 
 export const ServicesGrid = () => {
+    const { t } = useLanguage();
     const router = useRouter();
     const { isSupervisor, isHydrated } = useUser();
 
+    const baseServices = [
+        { icon: "event_busy", label: t.dashboard.services.permission, delay: 0.5, href: "/employee-dashboard/permission" },
+        { icon: "history_toggle_off", label: t.dashboard.services.overtime, delay: 0.6, href: "/employee-dashboard/overtime-request" },
+        { icon: "calendar_month", label: t.dashboard.services.report, delay: 0.7, href: "/employee-dashboard/attendance-report" },
+        { icon: "beach_access", label: t.dashboard.services.leave, delay: 0.8, href: "/employee-dashboard/leave" },
+    ];
+
     // Add approval service for supervisors only after hydration to prevent mismatch
     const services = isHydrated && isSupervisor
-        ? [...baseServices, { icon: "task_alt", label: "Approval", delay: 0.9, href: "/employee-dashboard/approvals" }]
+        ? [...baseServices, { icon: "task_alt", label: t.dashboard.services.approval, delay: 0.9, href: "/employee-dashboard/approvals" }]
         : baseServices;
 
     const handleNavigation = (href: string) => {
@@ -31,7 +33,7 @@ export const ServicesGrid = () => {
     return (
         <section>
             <div className="flex items-center justify-between mb-4 px-1">
-                <h3 className="text-slate-900 dark:text-white text-lg font-bold">Layanan HR</h3>
+                <h3 className="text-slate-900 dark:text-white text-lg font-bold">{t.dashboard.services.title}</h3>
             </div>
             <div className="grid grid-cols-4 gap-4">
                 {services.map((service) => (

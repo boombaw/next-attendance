@@ -3,6 +3,8 @@
 import React, { useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 
+import { LogIn, LogOut } from "lucide-react";
+
 // Store for time updates
 let currentTimeValue = new Date();
 const listeners = new Set<() => void>();
@@ -22,17 +24,23 @@ const subscribe = (callback: () => void) => {
 const getSnapshot = () => currentTimeValue;
 const getServerSnapshot = () => null as Date | null;
 
+import { useLanguage } from "@/lib/context/language-context";
+
 export const AttendanceHero = () => {
+    const { t, language } = useLanguage();
     const currentTime = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-    const dateFormatter = new Intl.DateTimeFormat("id-ID", {
+    const locale = language === "ID" ? "id-ID" : language === "JP" ? "ja-JP" : language === "FR" ? "fr-FR" : "en-US";
+
+
+    const dateFormatter = new Intl.DateTimeFormat(locale, {
         weekday: "long",
         day: "numeric",
         month: "short",
         year: "numeric",
     });
 
-    const timeFormatter = new Intl.DateTimeFormat("id-ID", {
+    const timeFormatter = new Intl.DateTimeFormat(locale, {
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
@@ -61,32 +69,29 @@ export const AttendanceHero = () => {
                 <div className="flex justify-between items-start">
                     <div className="flex flex-col">
                         <span className="text-xs font-medium opacity-90 tracking-widest uppercase">
-                            {currentTime ? dateFormatter.format(currentTime) : "Memuat..."}
+                            {currentTime ? dateFormatter.format(currentTime) : t.common.loading}
                         </span>
                         <span className="text-4xl font-bold tracking-tight mt-1 font-mono">
                             {currentTime ? timeFormatter.format(currentTime) : "--:--:--"}
                         </span>
-                    </div>
-                    <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
-                        <span className="text-xs font-bold tracking-wide">WIB</span>
-                    </div>
+                    </div> 
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mt-auto">
                     {/* Check In Box */}
                     <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 flex flex-col gap-1 hover:bg-white/20 transition-colors">
                         <div className="flex items-center gap-2 mb-1">
-                            <span className="material-symbols-outlined text-[20px] text-green-300">login</span>
-                            <span className="text-xs font-semibold opacity-90">Masuk</span>
+                            <LogIn className="text-[20px] text-green-300" />
+                            <span className="text-xs font-semibold opacity-90">{t.dashboard.hero.checkIn}</span>
                         </div>
                         <span className="text-xl font-bold">08:05</span>
                     </div>
 
                     {/* Check Out Box */}
                     <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10 flex flex-col gap-1">
-                        <div className="flex items-center gap-2 mb-1">
-                            <span className="material-symbols-outlined text-[20px] text-orange-200">logout</span>
-                            <span className="text-xs font-semibold opacity-80">Pulang</span>
+                        <div className="flex items-center gap-2 mb-1"> 
+                             <LogOut className="text-[20px] text-orange-200" />
+                            <span className="text-xs font-semibold opacity-80">{t.dashboard.hero.checkOut}</span>
                         </div>
                         <span className="text-xl font-bold opacity-60">--:--</span>
                     </div>

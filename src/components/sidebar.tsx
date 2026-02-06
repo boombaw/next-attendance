@@ -15,19 +15,22 @@ import {
 
 import { cn } from "@/lib/utils";
 
+import { useLanguage } from "@/lib/context/language-context";
+
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
     onNavigate?: () => void;
 }
 
 export function Sidebar({ className, onNavigate }: SidebarProps) {
+    const { t } = useLanguage();
     const pathname = usePathname();
 
     const navItems = [
-        { icon: Users, label: "Employees", href: "/employees" },
-        { icon: Building2, label: "Departments", href: "/departments" },
-        { icon: CheckCircle, label: "Approvals", href: "/approvals" },
-        { icon: FileText, label: "Attendance Reports", href: "/reports" },
-        { icon: Settings, label: "Settings", href: "/settings" },
+        { icon: Users, label: t.nav.employees, href: "/employees" },
+        { icon: Building2, label: t.nav.departments, href: "/departments" },
+        { icon: CheckCircle, label: t.nav.approvals, href: "/approvals" },
+        { icon: FileText, label: t.nav.attendanceReports, href: "/reports" },
+        { icon: Settings, label: t.nav.settings, href: "/settings" },
     ];
 
     return (
@@ -56,7 +59,7 @@ export function Sidebar({ className, onNavigate }: SidebarProps) {
                         onClick={onNavigate}
                     >
                         <LayoutDashboard className="h-5 w-5" />
-                        <span>Dashboard</span>
+                        <span>{t.nav.dashboard}</span>
                     </Link>
 
                     {navItems.map((item, index) => (
@@ -88,7 +91,7 @@ export function Sidebar({ className, onNavigate }: SidebarProps) {
                     className="flex w-full items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:bg-red-50 transition-all text-left"
                 >
                     <LogOut className="h-5 w-5" />
-                    <span className="text-sm font-medium">Logout</span>
+                    <span className="text-sm font-medium">{t.nav.logout}</span>
                 </button>
             </div>
         </div>

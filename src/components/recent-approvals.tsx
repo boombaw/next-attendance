@@ -1,7 +1,11 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useLanguage } from "@/lib/context/language-context";
 
 export function RecentApprovals() {
+    const { t } = useLanguage();
     const approvals = [
         {
             name: "Ahmad Fauzi",
@@ -20,8 +24,8 @@ export function RecentApprovals() {
     return (
         <div className="lg:col-span-2 bg-card rounded-xl shadow-sm border border-border flex flex-col">
             <div className="p-6 border-b border-border flex justify-between items-center">
-                <h3 className="text-lg font-bold text-foreground">Recent Approvals</h3>
-                <span className="bg-blue-50 text-blue-600 text-xs font-bold px-2 py-1 rounded-full dark:bg-blue-900/30 dark:text-blue-400">2 Pending</span>
+                <h3 className="text-lg font-bold text-foreground">{t.dashboard.recentApprovals.title}</h3>
+                <span className="bg-blue-50 text-blue-600 text-xs font-bold px-2 py-1 rounded-full dark:bg-blue-900/30 dark:text-blue-400">2 {t.dashboard.recentApprovals.pending}</span>
             </div>
             <div className="flex-1 p-6 flex flex-col gap-4">
                 {approvals.map((item, index) => (
@@ -38,10 +42,10 @@ export function RecentApprovals() {
                         </div>
                         <div className="flex items-center gap-2">
                             <Button className="flex-1 sm:flex-none h-9 bg-primary hover:bg-primary/90 text-white font-medium shadow-sm shadow-primary/30">
-                                Approve
+                                {t.dashboard.recentApprovals.approve}
                             </Button>
                             <Button variant="outline" className="flex-1 sm:flex-none h-9 border-border text-muted-foreground hover:bg-muted hover:text-foreground">
-                                Reject
+                                {t.dashboard.recentApprovals.reject}
                             </Button>
                         </div>
                     </div>

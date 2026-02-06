@@ -2,7 +2,7 @@
 
 import { Sidebar } from "@/components/sidebar";
 import { Header } from "@/components/header";
-import { Search, Filter, Briefcase, Download, Plus, Check, ChevronsUpDown } from "lucide-react";
+import { Search, Filter, Briefcase, Download, Plus, Check, ChevronsUpDown, Pencil, Trash2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -57,6 +57,7 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 import { useState } from "react";
+import { useLanguage } from "@/lib/context/language-context";
 
 interface Employee {
     name: string;
@@ -69,6 +70,8 @@ interface Employee {
 }
 
 export default function EmployeesPage() {
+    const { t } = useLanguage();
+
     const initialEmployees: Employee[] = [
         {
             name: "Michael Foster",
@@ -241,10 +244,10 @@ export default function EmployeesPage() {
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <div>
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
-                                    Employee Management
+                                    {t.employee.admin.title}
                                 </h2>
                                 <p className="text-gray-500 dark:text-gray-400 mt-1">
-                                    Manage your company&apos;s workforce roster and access.
+                                    {t.employee.admin.description}
                                 </p>
                             </div>
                             <Button
@@ -252,7 +255,7 @@ export default function EmployeesPage() {
                                 className="h-12 px-6 rounded-lg bg-primary hover:bg-blue-700 text-white font-bold transition-all shadow-lg shadow-blue-500/20 gap-2 shrink-0"
                             >
                                 <Plus className="w-5 h-5" />
-                                <span>Add New Employee</span>
+                                <span>{t.employee.admin.addEmployee}</span>
                             </Button>
                         </div>
 
@@ -266,7 +269,7 @@ export default function EmployeesPage() {
                                     </span>
                                     <Input
                                         className="w-full pl-10 pr-4 rounded-lg bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 text-sm"
-                                        placeholder="Search by name, email..."
+                                        placeholder={t.employee.admin.filter.search}
                                         type="text"
                                     />
                                 </div>
@@ -316,7 +319,7 @@ export default function EmployeesPage() {
                                 >
                                     <Download className="w-5 h-5" />
                                     <span className="text-sm font-medium hidden sm:inline">
-                                        Export
+                                        {t.common.export}
                                     </span>
                                 </Button>
                             </div>
@@ -328,19 +331,19 @@ export default function EmployeesPage() {
                                 <TableHeader>
                                     <TableRow className="bg-gray-50/50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700 hover:bg-transparent">
                                         <TableHead className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 min-w-[250px] h-auto">
-                                            Employee Name
+                                            {t.employee.admin.table.name}
                                         </TableHead>
                                         <TableHead className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 h-auto">
-                                            Department
+                                            {t.employee.admin.table.dept}
                                         </TableHead>
                                         <TableHead className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 h-auto">
-                                            Position
+                                            {t.employee.admin.table.position}
                                         </TableHead>
                                         <TableHead className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 h-auto">
-                                            Status
+                                            {t.common.state}
                                         </TableHead>
                                         <TableHead className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 text-right h-auto">
-                                            Actions
+                                            {t.common.actions}
                                         </TableHead>
                                     </TableRow>
                                 </TableHeader>
@@ -399,21 +402,7 @@ export default function EmployeesPage() {
                                                         size="icon"
                                                         className="bg-transparent hover:bg-blue-50 text-blue-600 dark:hover:bg-blue-900/20 dark:text-blue-400 transition-colors h-8 w-8"
                                                     >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            width="20"
-                                                            height="20"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            strokeWidth="2"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            className="lucide lucide-pencil w-4 h-4"
-                                                        >
-                                                            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                                                            <path d="m15 5 4 4" />
-                                                        </svg>
+                                                        <Pencil className="w-4 h-4" />
                                                     </Button>
                                                     <Button
                                                         onClick={() => handleDeleteOpen(employee)}
@@ -421,24 +410,7 @@ export default function EmployeesPage() {
                                                         size="icon"
                                                         className="bg-transparent hover:bg-red-50 text-red-600 dark:hover:bg-red-900/20 dark:text-red-400 transition-colors h-8 w-8"
                                                     >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            width="20"
-                                                            height="20"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            strokeWidth="2"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            className="lucide lucide-trash-2 w-4 h-4"
-                                                        >
-                                                            <path d="M3 6h18" />
-                                                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                                                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-                                                            <line x1="10" x2="10" y1="11" y2="17" />
-                                                            <line x1="14" x2="14" y1="11" y2="17" />
-                                                        </svg>
+                                                        <Trash2 className="w-4 h-4" />
                                                     </Button>
                                                 </div>
                                             </TableCell>
@@ -450,19 +422,19 @@ export default function EmployeesPage() {
                             {/* Pagination */}
                             <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
                                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                                    Showing{" "}
+                                    {t.common.pagination.showing}{" "}
                                     <span className="font-medium text-gray-900 dark:text-white">
                                         1
                                     </span>{" "}
-                                    to{" "}
+                                    {t.common.pagination.to}{" "}
                                     <span className="font-medium text-gray-900 dark:text-white">
                                         5
                                     </span>{" "}
-                                    of{" "}
+                                    {t.common.pagination.of}{" "}
                                     <span className="font-medium text-gray-900 dark:text-white">
                                         50
                                     </span>{" "}
-                                    employees
+                                    {t.employee.title}
                                 </p>
                                 <div className="flex gap-2">
                                     <Button
@@ -471,14 +443,14 @@ export default function EmployeesPage() {
                                         className="border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50"
                                         disabled
                                     >
-                                        Previous
+                                        {t.common.pagination.prev}
                                     </Button>
                                     <Button
                                         variant="outline"
                                         size="sm"
                                         className="border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600"
                                     >
-                                        Next
+                                        {t.common.pagination.next}
                                     </Button>
                                 </div>
                             </div>
@@ -493,15 +465,15 @@ export default function EmployeesPage() {
             <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
                 <DialogContent className="sm:max-w-[425px] bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
                     <DialogHeader>
-                        <DialogTitle>Add New Employee</DialogTitle>
+                        <DialogTitle>{t.employee.admin.addEmployee}</DialogTitle>
                         <DialogDescription>
-                            Enter the details for the new employee. Click submit to review.
+                            {t.employee.admin.form.description}
                         </DialogDescription>
                     </DialogHeader>
 
                     <form onSubmit={handleAddSubmit} className="space-y-4">
                         <div className="grid gap-2">
-                            <Label htmlFor="name">Full Name</Label>
+                            <Label htmlFor="name">{t.employee.admin.form.name}</Label>
                             <Input
                                 id="name"
                                 value={formData.name}
@@ -512,7 +484,7 @@ export default function EmployeesPage() {
                         </div>
 
                         <div className="grid gap-2">
-                            <Label htmlFor="email">Email Address</Label>
+                            <Label htmlFor="email">{t.employee.admin.form.email}</Label>
                             <Input
                                 id="email"
                                 type="email"
@@ -524,7 +496,7 @@ export default function EmployeesPage() {
                         </div>
 
                         <div className="grid gap-2">
-                            <Label htmlFor="role">Department</Label>
+                            <Label htmlFor="role">{t.employee.admin.form.department}</Label>
                             <Popover open={openCombobox} onOpenChange={setOpenCombobox}>
                                 <PopoverTrigger asChild>
                                     <Button
@@ -578,7 +550,7 @@ export default function EmployeesPage() {
                         </div>
 
                         <div className="grid gap-2">
-                            <Label htmlFor="position">Position</Label>
+                            <Label htmlFor="position">{t.employee.admin.form.position}</Label>
                             <Input
                                 id="position"
                                 value={formData.position}
@@ -591,10 +563,10 @@ export default function EmployeesPage() {
                         <div className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
                             <div className="space-y-0.5">
                                 <Label htmlFor="status" className="text-sm font-medium">
-                                    Status
+                                    {t.common.state}
                                 </Label>
                                 <div className="text-[0.8rem] text-muted-foreground">
-                                    Current status: {formData.status}
+                                    {formData.status}
                                 </div>
                             </div>
                             <Switch
@@ -612,9 +584,9 @@ export default function EmployeesPage() {
                                 variant="outline"
                                 onClick={() => setIsAddOpen(false)}
                             >
-                                Cancel
+                                {t.common.cancel}
                             </Button>
-                            <Button type="submit">Add Employee</Button>
+                            <Button type="submit">{t.common.add}</Button>
                         </DialogFooter>
                     </form>
                 </DialogContent>
@@ -624,22 +596,22 @@ export default function EmployeesPage() {
             <Dialog open={isUpdateOpen} onOpenChange={setIsUpdateOpen}>
                 <DialogContent className="sm:max-w-[425px] bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
                     <DialogHeader>
-                        <DialogTitle>Update Employee</DialogTitle>
+                        <DialogTitle>{t.employee.admin.updateEmployee}</DialogTitle>
                         <DialogDescription>
-                            Update information for {selectedEmployee?.name}.
+                            {t.employee.admin.form.description}
                         </DialogDescription>
                     </DialogHeader>
                     <form onSubmit={handleUpdateSubmit} className="space-y-4">
                         <div className="grid gap-2">
-                            <Label htmlFor="edit-name">Full Name</Label>
+                            <Label htmlFor="edit-name">{t.employee.admin.form.name}</Label>
                             <Input id="edit-name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required />
                         </div>
                         <div className="grid gap-2">
-                            <Label htmlFor="edit-email">Email Address</Label>
+                            <Label htmlFor="edit-email">{t.employee.admin.form.email}</Label>
                             <Input id="edit-email" type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
                         </div>
                         <div className="grid gap-2">
-                            <Label htmlFor="edit-role">Department</Label>
+                            <Label htmlFor="edit-role">{t.employee.admin.form.department}</Label>
                             <Popover open={openUpdateCombobox} onOpenChange={setOpenUpdateCombobox}>
                                 <PopoverTrigger asChild>
                                     <Button
@@ -687,16 +659,16 @@ export default function EmployeesPage() {
                             </Popover>
                         </div>
                         <div className="grid gap-2">
-                            <Label htmlFor="edit-position">Position</Label>
+                            <Label htmlFor="edit-position">{t.employee.admin.form.position}</Label>
                             <Input id="edit-position" value={formData.position} onChange={(e) => setFormData({ ...formData, position: e.target.value })} required />
                         </div>
                         <div className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
                             <div className="space-y-0.5">
                                 <Label htmlFor="edit-status" className="text-sm font-medium">
-                                    Status
+                                    {t.common.state}
                                 </Label>
                                 <div className="text-[0.8rem] text-muted-foreground">
-                                    Current status: {formData.status}
+                                    {formData.status}
                                 </div>
                             </div>
                             <Switch
@@ -709,7 +681,7 @@ export default function EmployeesPage() {
                         </div>
                         <DialogFooter>
                             <Button type="button" variant="outline" onClick={() => setIsUpdateOpen(false)}>Cancel</Button>
-                            <Button type="submit">Update Employee</Button>
+                            <Button type="submit">{t.common.update}</Button>
                         </DialogFooter>
                     </form>
                 </DialogContent>
@@ -719,14 +691,14 @@ export default function EmployeesPage() {
             <AlertDialog open={isConfirmAddOpen} onOpenChange={setIsConfirmAddOpen}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Confirm Addition</AlertDialogTitle>
+                        <AlertDialogTitle>{t.common.dialog.titleConfirmAdd}</AlertDialogTitle>
                         <AlertDialogDescription>
-                            Are you sure you want to add this new employee?
+                            {t.common.dialog.descriptionConfirmAdd}
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={confirmAdd}>Confirm</AlertDialogAction>
+                        <AlertDialogCancel>{t.common.cancel}</AlertDialogCancel>
+                        <AlertDialogAction onClick={confirmAdd}>{t.common.yes}</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
@@ -735,14 +707,14 @@ export default function EmployeesPage() {
             <AlertDialog open={isConfirmUpdateOpen} onOpenChange={setIsConfirmUpdateOpen}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Confirm Update</AlertDialogTitle>
+                        <AlertDialogTitle>{t.common.dialog.titleConfirmUpdate}</AlertDialogTitle>
                         <AlertDialogDescription>
-                            Are you sure you want to update this employee&apos;s details?
+                            {t.common.dialog.descriptionConfirmUpdate}
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={confirmUpdate}>Confirm</AlertDialogAction>
+                        <AlertDialogCancel>{t.common.cancel}</AlertDialogCancel>
+                        <AlertDialogAction onClick={confirmUpdate}>{t.common.yes}</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
@@ -751,15 +723,15 @@ export default function EmployeesPage() {
             <AlertDialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogTitle>{t.common.dialog.titleConfirmDelete}</AlertDialogTitle>
                         <AlertDialogDescription>
-                            This action cannot be undone. This will permanently delete
-                            <strong> {selectedEmployee?.name}</strong> from the system.
+                            {t.common.dialog.descriptionConfirmDelete}
+                            <strong> {selectedEmployee?.name}</strong>
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={confirmDelete} className="bg-red-600 hover:bg-red-700">Delete</AlertDialogAction>
+                        <AlertDialogCancel>{t.common.cancel}</AlertDialogCancel>
+                        <AlertDialogAction onClick={confirmDelete} className="bg-red-600 hover:bg-red-700">{t.common.delete}</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>

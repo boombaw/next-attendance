@@ -1,32 +1,36 @@
+"use client";
+
 import { Bell } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useLanguage } from "@/lib/context/language-context";
 
 export function ActivityFeed() {
+    const { t } = useLanguage();
     const activities = [
         {
             name: "Budi Santoso",
-            action: "entered the office",
+            action: t.dashboard.activity.entered,
             time: "08:05 AM",
             image: "https://lh3.googleusercontent.com/aida-public/AB6AXuASosdi31YtP1Jy-oi4QZotL5hzlkukEdAkg6Vm_qa8vcVEra6CnuZKL4r5aoduihlQWhRVti7t40tc9L1pJeXZMMaksjpMCNPuAqNu3fKT3-Kc7WhWkjgUgoOnymYAWBSGVtvdNmnUJi73k6W7I4ex5N3nYr8Hws3IRy0e9rhtsGb4dtYBHk1fY2fc2I8dVlgdGl2hsxipY-brR1nZjIHR3iW1qNtYmakgluYgEPtNA9Lav3U61zZlyIoLaCxN6BcW79968L0I5JyB",
             initials: "BS",
         },
         {
             name: "Siti Aminah",
-            action: "entered the office",
+            action: t.dashboard.activity.entered,
             time: "08:10 AM",
             image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCPNSKKWDMDvwoTw__QSqp2YJxNh4sRIexfrl61H2Wr7bguO86o1ge0TvIXv9via08gYjCpCWO_6Qv_oNmBOJ2WtS9kPvkHNMsLhgDpcD4f9yu8Jja9FUJaMwNgzVXcjPUOhrHjpU-5tNpnJvTXKiSZvylXRN2DF5afYoTh5St0dxMzwVC7MI5jBXAv1NU4h2HPJwZ8R7Bkwo13jab631h_KVAnJaoob-z2HyscE8U_3GnXxTQViLzKTL8DDH2JOixZcQIi-jzzEwN9",
             initials: "SA",
         },
         {
             name: "Rudi Hermawan",
-            action: "submitted a report",
+            action: t.dashboard.activity.submitted,
             time: "08:45 AM",
             image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBMJpUcBnXBMCzZC5Xxgr0OIh_gbgHE93r1EBi88Dg59KwpnCcGQW5snZMoFFmsglFprCR5__CYg8mRvveAzlez1oP6pvfaAzqfMT4Zbzw5H9a1QM68SFhmskAcHvOPFeTHhKVUGkS44uDlHvilTAFsggCTcpFn4R6A2OUF2LTXtEB4TX8csEzftNzJay8VR7jkTNZ9RPtZAQHN4lY95Rj0LMdqmuoP3cSTI8RNguUdExAmCrRc4H8uCsHUr8OMbahbVM4PSSHaYB9s",
             initials: "RH",
         },
         {
             name: null,
-            text: "System generated daily report",
+            text: t.dashboard.activity.systemReport,
             time: "09:00 AM",
             icon: Bell,
             isSystem: true
@@ -36,7 +40,7 @@ export function ActivityFeed() {
     return (
         <div className="bg-card rounded-xl shadow-sm border border-border flex flex-col">
             <div className="p-6 border-b border-border">
-                <h3 className="text-lg font-bold text-foreground">Recent Activity</h3>
+                <h3 className="text-lg font-bold text-foreground">{t.dashboard.activity.title}</h3>
             </div>
             <div className="flex-1 p-6 relative">
                 {/* Vertical Line */}

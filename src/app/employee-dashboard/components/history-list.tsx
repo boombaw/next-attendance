@@ -2,13 +2,16 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/context/language-context";
+import { CircleCheck, LogOut } from "lucide-react";
 
 export const HistoryList = () => {
+    const { t } = useLanguage();
     return (
         <section>
             <div className="flex items-center justify-between mb-4 px-1 mt-2">
-                <h3 className="text-slate-900 dark:text-white text-lg font-bold">Riwayat</h3>
-                <a className="text-sm text-[#137fec] font-semibold hover:underline" href="#">Lihat Semua</a>
+                <h3 className="text-slate-900 dark:text-white text-lg font-bold">{t.dashboard.history.title}</h3>
+                <a className="text-sm text-[#137fec] font-semibold hover:underline" href="#">{t.common.viewAll}</a>
             </div>
 
             <div className="flex flex-col gap-3">
@@ -21,16 +24,15 @@ export const HistoryList = () => {
                 >
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
-                            <span className="material-symbols-outlined text-[20px]">check_circle</span>
+                            <CircleCheck className="text-[20px]" />
                         </div>
                         <div className="flex flex-col">
-                            <h4 className="text-sm font-bold text-slate-900 dark:text-white">Check In Berhasil</h4>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Kantor Pusat • On time</p>
+                            <h4 className="text-sm font-bold text-slate-900 dark:text-white">{t.dashboard.hero.checkInSuccess}</h4>
+                            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Kantor Pusat • {t.common.onTime}</p>
                         </div>
                     </div>
                     <div className="flex flex-col items-end">
-                        <span className="text-sm font-bold text-slate-900 dark:text-white">08:05</span>
-                        <span className="text-[10px] text-slate-400 font-bold">WIB</span>
+                        <span className="text-sm font-bold text-slate-900 dark:text-white">08:05</span> 
                     </div>
                 </motion.div>
 
@@ -43,16 +45,15 @@ export const HistoryList = () => {
                 >
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
-                            <span className="material-symbols-outlined text-[20px]">logout</span>
+                            <LogOut className="text-[20px]" />
                         </div>
                         <div className="flex flex-col">
-                            <h4 className="text-sm font-bold text-slate-900 dark:text-white">Check Out</h4>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">12 Jan • Kemarin</p>
+                            <h4 className="text-sm font-bold text-slate-900 dark:text-white">{t.dashboard.hero.checkOut}</h4>
+                            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">12 Jan • {t.common.yesterday}</p>
                         </div>
                     </div>
                     <div className="flex flex-col items-end">
-                        <span className="text-sm font-bold text-slate-900 dark:text-white">17:02</span>
-                        <span className="text-[10px] text-slate-400 font-bold">WIB</span>
+                        <span className="text-sm font-bold text-slate-900 dark:text-white">17:02</span> 
                     </div>
                 </motion.div>
             </div>

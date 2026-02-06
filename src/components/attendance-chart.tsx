@@ -1,7 +1,11 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/context/language-context";
 
 export function AttendanceChart() {
+    const { t } = useLanguage();
     const data = [
         { day: "Mon", value: 118, height: "85%", fullHeight: "60%" },
         { day: "Tue", value: 122, height: "92%", fullHeight: "75%" },
@@ -15,9 +19,9 @@ export function AttendanceChart() {
     return (
         <div className="lg:col-span-3 bg-card p-6 rounded-xl shadow-sm border border-border">
             <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-bold text-foreground">Weekly Attendance Overview</h3>
+                <h3 className="text-lg font-bold text-foreground">{t.dashboard.chart.title}</h3>
                 <Button variant="link" className="text-primary hover:text-primary/80 p-0 h-auto font-medium decoration-0">
-                    View Report <ArrowRight className="ml-1 h-4 w-4" />
+                    {t.dashboard.chart.viewReport} <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
             </div>
 

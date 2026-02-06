@@ -7,9 +7,12 @@ import { MonthFilter } from "./components/month-filter";
 import { StatsCards } from "./components/stats-cards";
 import { AttendanceHistory } from "./components/attendance-history";
 
+import { useLanguage } from "@/lib/context/language-context";
+
 export default function AttendanceReportPage() {
     // Default to current date
     const [currentDate, setCurrentDate] = useState(new Date());
+    const { t } = useLanguage();
 
     return (
         <div className="min-h-screen bg-white dark:bg-[#101922] text-slate-900 dark:text-slate-100 font-sans pb-[100px]">
@@ -21,7 +24,7 @@ export default function AttendanceReportPage() {
                     <div className="px-4 pt-6 pb-2">
                         <div className="flex items-center justify-between">
                             <h3 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                                Ringkasan Bulan Ini
+                                {t.attendanceReports.employee.resume}
                             </h3>
                             <MonthFilter
                                 date={currentDate}

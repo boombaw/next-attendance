@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Slider } from "@/components/ui/slider"
 import { Sidebar } from "@/components/sidebar"
 import { Header } from "@/components/header"
+import { useLanguage } from "@/lib/context/language-context"
 
 // Dynamically import MapPicker to avoid SSR issues with Leaflet
 const MapPicker = dynamic(() => import("@/components/map-picker"), {
@@ -20,6 +21,9 @@ const MapPicker = dynamic(() => import("@/components/map-picker"), {
 })
 
 export default function SettingsPage() {
+
+    const {t} = useLanguage();
+
     const [radius, setRadius] = useState([50])
     const [address, setAddress] = useState("123 Business Park, Jakarta, Indonesia")
 
@@ -45,31 +49,31 @@ export default function SettingsPage() {
                 <div className="flex-1 overflow-y-auto p-8 scroll-smooth">
                     <div className="max-w-5xl mx-auto space-y-8 pb-20">
                         <div className="flex flex-col gap-1">
-                            <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">System Settings</h1>
-                            <p className="text-slate-500 dark:text-slate-400">Manage operational configurations for shifts and location tracking.</p>
+                            <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{t.settings.admin.title}</h1>
+                            <p className="text-slate-500 dark:text-slate-400">{t.settings.admin.description}</p>
                         </div>
 
                         {/* Shift Management Section */}
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                 <div className="space-y-1">
-                                    <CardTitle className="text-lg font-bold">Shift Management</CardTitle>
-                                    <CardDescription>Define working hours for employee attendance.</CardDescription>
+                                    <CardTitle className="text-lg font-bold">{t.settings.admin.shift.title}</CardTitle>
+                                    <CardDescription>{t.settings.admin.shift.description}</CardDescription>
                                 </div>
                                 <Button variant="outline" className="text-primary hover:text-primary hover:bg-primary/10 border-none bg-primary/5">
                                     <Plus className="mr-2 h-4 w-4" />
-                                    Add New Shift
+                                    {t.settings.admin.shift.addShift}
                                 </Button>
                             </CardHeader>
                             <CardContent>
                                 <Table>
                                     <TableHeader>
                                         <TableRow className="uppercase text-xs font-semibold tracking-wide text-slate-500 hover:bg-transparent">
-                                            <TableHead>Shift Name</TableHead>
-                                            <TableHead>Start Time</TableHead>
-                                            <TableHead>End Time</TableHead>
-                                            <TableHead>Status</TableHead>
-                                            <TableHead className="text-right">Actions</TableHead>
+                                            <TableHead>{t.settings.admin.shift.table.name}</TableHead>
+                                            <TableHead>{t.settings.admin.shift.table.startTime}</TableHead>
+                                            <TableHead>{t.settings.admin.shift.table.endTime}</TableHead>
+                                            <TableHead>{t.common.state}</TableHead>
+                                            <TableHead className="text-right">{t.common.actions}</TableHead>
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody>
@@ -107,8 +111,8 @@ export default function SettingsPage() {
                         {/* Geofence Configuration Section */}
                         <Card>
                             <CardHeader className="border-b border-slate-100 dark:border-slate-700/50 pb-4 mb-4">
-                                <CardTitle className="text-lg font-bold">Geofence Configuration</CardTitle>
-                                <CardDescription>Set the office location and acceptable distance for check-ins.</CardDescription>
+                                <CardTitle className="text-lg font-bold">{t.settings.admin.location.title}</CardTitle>
+                                <CardDescription>{t.settings.admin.location.description}</CardDescription>
                             </CardHeader>
                             <CardContent className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-6 pt-0">
                                 {/* Inputs */}
@@ -124,11 +128,11 @@ export default function SettingsPage() {
                                                 onChange={(e) => setAddress(e.target.value)}
                                             />
                                         </div>
-                                        <p className="text-xs text-slate-500">Enter the full address to center the map.</p>
+                                        <p className="text-xs text-slate-500">{t.settings.admin.location.fullAddress}</p>
                                     </div>
 
                                     <div className="space-y-4">
-                                        <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Allowed Radius (meters)</label>
+                                        <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">{t.settings.admin.location.radius}</label>
                                         <div className="flex items-center gap-3">
                                             <Input
                                                 type="number"
@@ -153,7 +157,7 @@ export default function SettingsPage() {
                                     <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 flex gap-3 items-start">
                                         <Info className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                                         <p className="text-sm text-slate-600 dark:text-slate-400">
-                                            Employees must be within the blue circle to clock in or out successfully.
+                                            {t.settings.admin.location.info}
                                         </p>
                                     </div>
                                 </div>
@@ -171,7 +175,7 @@ export default function SettingsPage() {
                         <div className="max-w-5xl mx-auto flex justify-end lg:pointer-events-auto">
                             <Button className="px-8 py-6 bg-primary hover:bg-blue-600 text-white font-bold shadow-lg shadow-primary/30 rounded-lg gap-2 text-md">
                                 <Save className="h-5 w-5" />
-                                Save Changes
+                                {t.common.save}
                             </Button>
                         </div>
                     </div>

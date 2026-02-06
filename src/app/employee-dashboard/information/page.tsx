@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { BottomNav } from "../components/bottom-nav";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useLanguage } from "@/lib/context/language-context";
+import { ChevronLeft } from "lucide-react";
 
 // Mock data for notifications
 const notifications = [
@@ -64,19 +66,21 @@ const getStatusColor = (status: string) => {
 };
 
 const getStatusLabel = (status: string) => {
+    const { t } = useLanguage();
     switch (status) {
         case "approved":
-            return "Disetujui";
+            return t.attendanceReports.employee.stats.approved;
         case "rejected":
-            return "Ditolak";
+            return t.attendanceReports.employee.stats.rejected;
         case "pending":
-            return "Menunggu";
+            return t.attendanceReports.employee.stats.pending;
         default:
             return status;
     }
 };
 
 export default function InformationPage() {
+    const { t } = useLanguage();
     return (
         <div className="min-h-screen bg-white dark:bg-[#101922] text-slate-900 dark:text-slate-100 font-sans pb-[100px]">
             <div className="max-w-md mx-auto relative bg-white dark:bg-[#101922] min-h-screen overflow-x-hidden ">
@@ -87,11 +91,11 @@ export default function InformationPage() {
                             href="/employee-dashboard"
                             className="flex size-10 shrink-0 items-center justify-center text-white transition-opacity hover:opacity-80 rounded-none"
                         >
-                            <span className="material-symbols-outlined text-[24px]">arrow_back_ios</span>
+                           <ChevronLeft className="text-[24px]" />
                         </Link>
 
                         <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-10">
-                            Informasi
+                            {t.common.information}
                         </h2>
                     </div>
                 </div>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | Absensi Yuk - Next.js Workforce Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #e11d48;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .nav-link:hover {
+            color: #2563eb;
+            background-color: #eff6ff;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex min-h-screen">
+        <aside class="w-72 bg-white border-r border-slate-200 fixed h-full hidden lg:block">
+            <div class="p-8">
+                <h1 class="text-2xl font-bold text-blue-600 tracking-tight">Absensi Yuk</h1>
+                <p class="text-xs font-medium text-slate-400 mt-1 uppercase tracking-widest">Documentation v1.0</p>
+            </div>
+            <nav class="px-4">
+                <ul class="space-y-1">
+                    <li><a href="#welcome" class="nav-link block px-4 py-2.5 rounded-lg transition">Welcome</a></li>
+                    <li><a href="#features" class="nav-link block px-4 py-2.5 rounded-lg transition">Core Features</a>
+                    </li>
+                    <li><a href="#structure" class="nav-link block px-4 py-2.5 rounded-lg transition">Folder
+                            Structure</a></li>
+                    <li><a href="#installation"
+                            class="nav-link block px-4 py-2.5 rounded-lg transition">Installation</a></li>
+                    <li><a href="#customization"
+                            class="nav-link block px-4 py-2.5 rounded-lg transition">Customization</a></li>
+                    <li><a href="#deployment" class="nav-link block px-4 py-2.5 rounded-lg transition">Deployment</a>
+                    </li>
+                    <li><a href="#credits" class="nav-link block px-4 py-2.5 rounded-lg transition">Credits &
+                            Sources</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="flex-1 lg:ml-72 p-8 md:p-16 max-w-5xl">
+            <section id="welcome" class="mb-20">
+                <div class="inline-block px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-bold mb-4">
+                    INTRODUCTION</div>
+                <h2 class="text-4xl font-extrabold mb-6 tracking-tight">Welcome to Absensi Yuk</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    First of all, thank you for purchasing <strong>Absensi Yuk</strong>. This template is a
+                    high-performance attendance and workforce management system built with <strong>Next.js 14+ (App
+                        Router)</strong>, Tailwind CSS, and TypeScript.
+                </p>
+                <p class="mt-4 text-slate-600">This documentation aims to help you set up the project and understand its
+                    architecture for faster development.</p>
+            </section>
+
+            <hr class="my-12 border-slate-200">
+
+            <section id="features" class="mb-20">
+                <h3 class="text-2xl font-bold mb-6">Core Features</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 border border-slate-200 rounded-xl bg-white shadow-sm">
+                        <span class="font-bold text-blue-600 italic block mb-1">Dual Role System</span>
+                        <p class="text-sm text-slate-500">Built-in views for both Employee and Supervisor roles.</p>
+                    </div>
+                    <div class="p-4 border border-slate-200 rounded-xl bg-white shadow-sm">
+                        <span class="font-bold text-blue-600 italic block mb-1">Modern Tech Stack</span>
+                        <p class="text-sm text-slate-500">Utilizing Next.js App Router for optimal performance.</p>
+                    </div>
+                    <div class="p-4 border border-slate-200 rounded-xl bg-white shadow-sm">
+                        <span class="font-bold text-blue-600 italic block mb-1">Dark Mode Ready</span>
+                        <p class="text-sm text-slate-500">Fully compatible with light and dark color schemes.</p>
+                    </div>
+                    <div class="p-4 border border-slate-200 rounded-xl bg-white shadow-sm">
+                        <span class="font-bold text-blue-600 italic block mb-1">Fully Responsive</span>
+                        <p class="text-sm text-slate-500">Looks great on mobile, tablet, and desktop screens.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="structure" class="mb-20">
+                <h3 class="text-2xl font-bold mb-6">Folder Structure</h3>
+                <p class="text-slate-600 mb-4">Absensi Yuk follows a modular architecture for easy maintenance:</p>
+                <pre>
+src/
+├── app/             # Application routes & layouts (Next.js 14+)
+├── components/      # Reusable UI components (Shared UI)
+├── contexts/        # React Context API (Auth, User State)
+├── hooks/           # Custom React hooks
+├── lib/             # Third-party configs & helper functions
+├── styles/          # Global styles & Tailwind entry
+└── types/           # TypeScript interfaces & types</pre>
+            </section>
+
+            <section id="installation" class="mb-20">
+                <h3 class="text-2xl font-bold mb-6">Installation Guide</h3>
+                <p class="mb-4">Follow these steps to run the project locally:</p>
+
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="font-semibold mb-2">1. Install Dependencies</h4>
+                        <p class="text-slate-600 mb-2 font-light">Open your terminal in the project root directory and
+                            run:</p>
+                        <pre>npm install</pre>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-2">2. Run Development Server</h4>
+                        <pre>npm run dev</pre>
+                        <p class="text-slate-600 mt-2">The application will be available at
+                            <code>http://localhost:3000</code>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="customization" class="mb-20">
+                <h3 class="text-2xl font-bold mb-6">Customization</h3>
+                <h4 class="font-semibold mb-2">Changing Brand Colors</h4>
+                <p class="mb-4">You can easily modify the primary colors in <code>tailwind.config.ts</code>. The
+                    template uses Tailwind's utility-first approach.</p>
+
+                <h4 class="font-semibold mt-8 mb-2">Iconography</h4>
+                <p class="mb-2 text-slate-600">This project uses <strong>Material Symbols Outlined</strong>. To change
+                    an icon:</p>
+                <pre>&lt;span className="material-symbols-outlined"&gt;settings&lt;/span&gt;</pre>
+                <p class="text-sm text-slate-400 italic">Browse icons at: <a href="https://fonts.google.com/icons"
+                        target="_blank" class="text-blue-500">fonts.google.com/icons</a></p>
+            </section>
+
+            <section id="deployment" class="mb-20">
+                <h3 class="text-2xl font-bold mb-6">Deployment</h3>
+                <p class="mb-4 text-slate-600">This template is highly optimized for <strong>Vercel</strong>, but can be
+                    deployed on any host that supports Node.js.</p>
+                <ol class="list-decimal ml-6 space-y-2 text-slate-600">
+                    <li>Push your code to a Git repository (GitHub/GitLab).</li>
+                    <li>Connect your repository to Vercel.</li>
+                    <li>Vercel will automatically detect Next.js settings.</li>
+                    <li>Click <strong>Deploy</strong>.</li>
+                </ol>
+            </section>
+
+            <section id="credits" class="mb-20">
+                <h3 class="text-2xl font-bold mb-6">Credits & Sources</h3>
+                <ul class="list-disc ml-6 space-y-3 text-slate-600">
+                    <li><strong>Framework:</strong> Next.js 14+</li>
+                    <li><strong>Styling:</strong> Tailwind CSS</li>
+                    <li><strong>Fonts:</strong> Inter via Google Fonts</li>
+                    <li><strong>Icons:</strong> Material Symbols Outlined</li>
+                    <li><strong>Images:</strong> Unsplash (Mockup purposes only)</li>
+                </ul>
+            </section>
+
+            <footer class="text-slate-400 text-sm mt-32 border-t border-slate-200 pt-8 pb-12">
+                <p>&copy; 2026 Absensi Yuk Team. Created with passion for developers.</p>
+            </footer>
+        </main>
+    </div>
+
+</body>
+
+</html>

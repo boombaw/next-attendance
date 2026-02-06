@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowUp, CheckCircle, Clock, Plane, MoreHorizontal, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -38,23 +40,27 @@ function StatCard({ title, value, icon: Icon, trend, trendIcon: TrendIcon, color
     );
 }
 
+import { useLanguage } from "@/lib/context/language-context";
+
 export function DashboardStats() {
+    const { t } = useLanguage();
+
     const stats = [
         {
-            title: "Present",
+            title: t.status.present,
             value: "124",
             icon: CheckCircle,
-            trend: "+4% from yesterday",
+            trend: `+4% ${t.dashboard.stats.trend}`,
             trendIcon: ArrowUp,
             colorClass: "text-green-600",
             bgClass: "bg-green-50 dark:bg-green-900/20",
             trendColorClass: "text-green-600",
         },
         {
-            title: "Late",
+            title: t.status.late,
             value: "5",
             icon: Clock,
-            trend: "Action needed",
+            trend: t.dashboard.stats.actionNeeded,
             trendIcon: AlertTriangle,
             colorClass: "text-orange-600",
             bgClass: "bg-orange-50 dark:bg-orange-900/20",
@@ -62,19 +68,19 @@ export function DashboardStats() {
             actionRequired: true,
         },
         {
-            title: "Leave",
+            title: t.status.leave,
             value: "3",
             icon: Plane,
-            trend: "Approved requests",
+            trend: t.dashboard.stats.approved,
             colorClass: "text-purple-600",
             bgClass: "bg-purple-50 dark:bg-purple-900/20",
             trendColorClass: "text-muted-foreground",
         },
         {
-            title: "Pending",
+            title: t.dashboard.stats.pending,
             value: "2",
             icon: MoreHorizontal,
-            trend: "Requires approval",
+            trend: t.dashboard.stats.requiresApproval,
             colorClass: "text-primary",
             bgClass: "bg-blue-50 dark:bg-blue-900/20",
             trendColorClass: "text-primary",

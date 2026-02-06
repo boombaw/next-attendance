@@ -1,5 +1,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/lib/context/language-context";
+import { CalendarDays, Clock, Stethoscope, XCircle, Coffee, LogIn, LogOut, LucideIcon } from "lucide-react";
 
 const HistoryItem = ({
     day,
@@ -8,7 +10,7 @@ const HistoryItem = ({
     timeIn,
     timeOut,
     statusText,
-    icon,
+    Icon,
     iconBg,
     iconColor
 }: {
@@ -18,10 +20,11 @@ const HistoryItem = ({
     timeIn?: string;
     timeOut?: string;
     statusText?: string;
-    icon: string;
+    Icon: LucideIcon;
     iconBg: string; // Tailwind class
     iconColor: string; // Tailwind class
 }) => {
+    const { t } = useLanguage();
 
     const getBadgeStyle = () => {
         switch (status) {
@@ -36,11 +39,11 @@ const HistoryItem = ({
 
     const getStatusLabel = () => {
         switch (status) {
-            case "ontime": return "Tepat Waktu";
-            case "late": return "Terlambat";
-            case "sick": return "Sakit";
-            case "absent": return "Tanpa Ket.";
-            case "holiday": return "Libur";
+            case "ontime": return t.attendanceReports.employee.history.ontime;
+            case "late": return t.attendanceReports.employee.history.late;
+            case "sick": return t.attendanceReports.employee.history.sick;
+            case "absent": return t.attendanceReports.employee.history.absent;
+            case "holiday": return t.attendanceReports.employee.history.holiday;
             default: return "-";
         }
     };
@@ -51,7 +54,7 @@ const HistoryItem = ({
             status === "holiday" && "opacity-50"
         )}>
             <div className={cn("flex h-12 w-12 shrink-0 items-center justify-center rounded-xl", iconBg, iconColor)}>
-                <span className="material-symbols-outlined">{icon}</span>
+                <Icon className="w-6 h-6" />
             </div>
             <div className="flex flex-1 flex-col justify-center">
                 <div className="flex justify-between items-start">
@@ -60,13 +63,13 @@ const HistoryItem = ({
                         <p className="text-slate-500 dark:text-slate-400 text-sm mt-0.5 flex items-center gap-1">
                             {timeIn ? (
                                 <>
-                                    <span className="material-symbols-outlined text-[14px]">login</span>
+                                    <LogIn className="w-[14px] h-[14px]" />
                                     <span className={status === "late" ? "text-orange-600 dark:text-orange-400 font-medium" : ""}>{timeIn}</span>
                                     &nbsp;
-                                    <span className="material-symbols-outlined text-[14px]">logout</span> {timeOut}
+                                    <LogOut className="w-[14px] h-[14px]" /> {timeOut}
                                 </>
                             ) : (
-                                statusText
+                                <>{t.attendanceReports.note}: {statusText}</>
                             )}
                         </p>
                     </div>
@@ -82,42 +85,43 @@ const HistoryItem = ({
 };
 
 export const AttendanceHistory = () => {
+    const { t } = useLanguage();
     return (
         <>
             <div className="h-2 bg-slate-50 dark:bg-[#0c1219]"></div>
             <div className="flex flex-col pb-24">
                 <div className="px-4 py-4">
-                    <h3 className="text-base font-bold text-slate-900 dark:text-white">Riwayat Presensi</h3>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white">{t.attendanceReports.employee.history.title}</h3>
                 </div>
 
                 <HistoryItem
                     day="Senin" date="12 Jan" status="ontime" timeIn="07:55" timeOut="17:05"
-                    icon="calendar_today" iconBg="bg-green-50 dark:bg-green-900/20" iconColor="text-green-600 dark:text-green-400"
+                    Icon={CalendarDays} iconBg="bg-green-50 dark:bg-green-900/20" iconColor="text-green-600 dark:text-green-400"
                 />
 
                 <HistoryItem
                     day="Selasa" date="13 Jan" status="late" timeIn="08:15" timeOut="17:10"
-                    icon="running_with_errors" iconBg="bg-orange-50 dark:bg-orange-900/20" iconColor="text-orange-600 dark:text-orange-400"
+                    Icon={Clock} iconBg="bg-orange-50 dark:bg-orange-900/20" iconColor="text-orange-600 dark:text-orange-400"
                 />
 
                 <HistoryItem
                     day="Rabu" date="14 Jan" status="ontime" timeIn="07:45" timeOut="17:00"
-                    icon="calendar_today" iconBg="bg-green-50 dark:bg-green-900/20" iconColor="text-green-600 dark:text-green-400"
+                    Icon={CalendarDays} iconBg="bg-green-50 dark:bg-green-900/20" iconColor="text-green-600 dark:text-green-400"
                 />
 
                 <HistoryItem
                     day="Kamis" date="15 Jan" status="sick" statusText="Surat Dokter"
-                    icon="medication" iconBg="bg-blue-50 dark:bg-blue-900/20" iconColor="text-blue-600 dark:text-blue-400"
+                    Icon={Stethoscope} iconBg="bg-blue-50 dark:bg-blue-900/20" iconColor="text-blue-600 dark:text-blue-400"
                 />
 
                 <HistoryItem
                     day="Jumat" date="16 Jan" status="absent" statusText="-"
-                    icon="block" iconBg="bg-red-50 dark:bg-red-900/20" iconColor="text-red-600 dark:text-red-400"
+                    Icon={XCircle} iconBg="bg-red-50 dark:bg-red-900/20" iconColor="text-red-600 dark:text-red-400"
                 />
 
                 <HistoryItem
                     day="Sabtu" date="17 Jan" status="holiday" statusText="Libur Akhir Pekan"
-                    icon="weekend" iconBg="bg-gray-100 dark:bg-gray-800" iconColor="text-gray-400"
+                    Icon={Coffee} iconBg="bg-gray-100 dark:bg-gray-800" iconColor="text-gray-400"
                 />
             </div>
         </>

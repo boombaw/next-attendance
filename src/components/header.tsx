@@ -2,6 +2,7 @@ import { Bell } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MobileNav } from "@/components/mobile-nav";
 import Link from "next/link";
+import { LanguageSelector } from "@/components/language-selector";
 
 interface BreadcrumbItem {
     label: string;
@@ -32,8 +33,8 @@ export function Header({ breadcrumbs }: HeaderProps) {
                                     <Link
                                         href={item.href}
                                         className={`text-sm font-medium transition-colors ${item.active
-                                                ? "text-primary dark:text-blue-400"
-                                                : "text-muted-foreground hover:text-primary dark:hover:text-blue-400"
+                                            ? "text-primary dark:text-blue-400"
+                                            : "text-muted-foreground hover:text-primary dark:hover:text-blue-400"
                                             }`}
                                         aria-current={item.active ? "page" : undefined}
                                     >
@@ -52,6 +53,7 @@ export function Header({ breadcrumbs }: HeaderProps) {
             </div>
 
             <div className="flex items-center gap-4">
+                <LanguageSelector />
                 <button className="relative p-2 text-muted-foreground hover:text-primary transition-colors rounded-full hover:bg-muted">
                     <Bell className="w-5 h-5" />
                     <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-background"></span>

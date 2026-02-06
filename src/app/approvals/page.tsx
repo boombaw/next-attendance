@@ -1,3 +1,5 @@
+"use client";
+
 import { Sidebar } from "@/components/sidebar";
 import { Header } from "@/components/header";
 import {
@@ -21,8 +23,11 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useLanguage } from "@/lib/context/language-context";
 
 export default function ApprovalsPage() {
+    const { t } = useLanguage();
+
     const approvals = [
         {
             name: "Budi Santoso",
@@ -97,48 +102,45 @@ export default function ApprovalsPage() {
 
                         {/* Page Heading */}
                         <div className="mb-6">
-                            <h2 className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">Final Approvals</h2>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">Manage requests from team leads and executives</p>
+                            <h2 className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">{t.approvals.admin.title}</h2>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{t.approvals.admin.description}</p>
                         </div>
 
                         {/* Stats Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="bg-white dark:bg-[#1a202c] rounded-xl p-5 border border-gray-200 dark:border-gray-800 shadow-sm flex flex-col gap-1">
                                 <div className="flex items-center justify-between mb-2">
-                                    <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">Pending Requests</span>
+                                    <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">{t.approvals.admin.stats.pending}</span>
                                     <div className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
                                         <Hourglass className="w-5 h-5" />
                                     </div>
                                 </div>
                                 <div className="flex items-end gap-2">
-                                    <span className="text-3xl font-bold text-gray-900 dark:text-white">12</span>
-                                    <span className="text-sm font-medium text-emerald-600 mb-1">+2 new</span>
+                                    <span className="text-3xl font-bold text-gray-900 dark:text-white">12</span> 
                                 </div>
                             </div>
 
                             <div className="bg-white dark:bg-[#1a202c] rounded-xl p-5 border border-gray-200 dark:border-gray-800 shadow-sm flex flex-col gap-1">
                                 <div className="flex items-center justify-between mb-2">
-                                    <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">Approved Today</span>
+                                    <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">{t.approvals.admin.stats.approved}</span>
                                     <div className="p-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400">
                                         <CheckCircle2 className="w-5 h-5" />
                                     </div>
                                 </div>
                                 <div className="flex items-end gap-2">
-                                    <span className="text-3xl font-bold text-gray-900 dark:text-white">45</span>
-                                    <span className="text-sm font-medium text-emerald-600 mb-1">+15% vs yesterday</span>
+                                    <span className="text-3xl font-bold text-gray-900 dark:text-white">45</span> 
                                 </div>
                             </div>
 
                             <div className="bg-white dark:bg-[#1a202c] rounded-xl p-5 border border-gray-200 dark:border-gray-800 shadow-sm flex flex-col gap-1">
                                 <div className="flex items-center justify-between mb-2">
-                                    <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">Urgent Attention</span>
+                                    <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">{t.approvals.admin.stats.rejected}</span>
                                     <div className="p-1.5 rounded-lg bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400">
                                         <AlertTriangle className="w-5 h-5" />
                                     </div>
                                 </div>
                                 <div className="flex items-end gap-2">
-                                    <span className="text-3xl font-bold text-gray-900 dark:text-white">3</span>
-                                    <span className="text-sm font-medium text-gray-500 mb-1">Overdue &gt; 24h</span>
+                                    <span className="text-3xl font-bold text-gray-900 dark:text-white">3</span> 
                                 </div>
                             </div>
                         </div>
@@ -146,15 +148,15 @@ export default function ApprovalsPage() {
                         {/* Table Section */}
                         <div className="bg-white dark:bg-[#1a202c] rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm flex flex-col">
                             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
-                                <h3 className="text-base font-semibold text-gray-900 dark:text-white">Request List</h3>
+                                <h3 className="text-base font-semibold text-gray-900 dark:text-white">{t.approvals.admin.table.caption}</h3>
                                 <div className="flex gap-2">
                                     <Button variant="outline" className="h-9 bg-gray-100 dark:bg-gray-800 border-none hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 gap-1.5">
                                         <Filter className="w-4 h-4" />
-                                        Filter
+                                        {t.common.filter}
                                     </Button>
                                     <Button variant="outline" className="h-9 bg-gray-100 dark:bg-gray-800 border-none hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 gap-1.5">
                                         <Download className="w-4 h-4" />
-                                        Export
+                                        {t.common.export}
                                     </Button>
                                 </div>
                             </div>
@@ -163,11 +165,11 @@ export default function ApprovalsPage() {
                                 <Table>
                                     <TableHeader>
                                         <TableRow className="bg-gray-50/50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-800 hover:bg-transparent">
-                                            <TableHead className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Employee</TableHead>
-                                            <TableHead className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Request Type</TableHead>
-                                            <TableHead className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Date / Duration</TableHead>
-                                            <TableHead className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Reason</TableHead>
-                                            <TableHead className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">Actions</TableHead>
+                                            <TableHead className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{t.approvals.admin.table.employee}</TableHead>
+                                            <TableHead className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{t.approvals.admin.table.type}</TableHead>
+                                            <TableHead className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{t.approvals.admin.table.range}</TableHead>
+                                            <TableHead className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{t.approvals.admin.table.reason}</TableHead>
+                                            <TableHead className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">{t.common.actions}</TableHead>
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody className="divide-y divide-gray-200 dark:divide-gray-800">
@@ -215,22 +217,41 @@ export default function ApprovalsPage() {
                                 </Table>
                             </div>
 
-                            {/* Pagination */}
-                            <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-800 flex items-center justify-between">
+                           {/* Pagination */}
+                            <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
                                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                                    Showing <span className="font-medium text-gray-900 dark:text-white">1</span> to <span className="font-medium text-gray-900 dark:text-white">5</span> of <span className="font-medium text-gray-900 dark:text-white">12</span> results
+                                    {t.common.pagination.showing}{" "}
+                                    <span className="font-medium text-gray-900 dark:text-white">
+                                        1
+                                    </span>{" "}
+                                    {t.common.pagination.to}{" "}
+                                    <span className="font-medium text-gray-900 dark:text-white">
+                                        5
+                                    </span>{" "}
+                                    {t.common.pagination.of}{" "}
+                                    <span className="font-medium text-gray-900 dark:text-white">
+                                        5
+                                    </span>{" "}
+                                    {t.department.title}
                                 </p>
-                                <nav className="flex items-center gap-1">
-                                    <Button variant="ghost" size="icon" disabled className="text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800">
-                                        <ChevronLeft className="w-5 h-5" />
+                                <div className="flex gap-2">
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        className="border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50"
+                                        disabled
+                                    >
+                                        {t.common.pagination.prev}
                                     </Button>
-                                    <Button className="h-9 w-9 bg-primary text-white hover:bg-primary/90">1</Button>
-                                    <Button variant="ghost" className="h-9 w-9 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">2</Button>
-                                    <Button variant="ghost" className="h-9 w-9 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">3</Button>
-                                    <Button variant="ghost" size="icon" className="text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800">
-                                        <ChevronRight className="w-5 h-5" />
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        className="border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50"
+                                        disabled
+                                    >
+                                        {t.common.pagination.next}
                                     </Button>
-                                </nav>
+                                </div>
                             </div>
                         </div>
                     </div>

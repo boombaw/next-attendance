@@ -3,8 +3,11 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useLanguage } from "@/lib/context/language-context";
+import { CheckCircle, ChevronLeft, Key, Lock, Save } from "lucide-react";
 
 export default function ChangePasswordPage() {
+    const {t} = useLanguage();
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -27,11 +30,11 @@ export default function ChangePasswordPage() {
                             href="/employee-dashboard/profile"
                             className="flex size-10 shrink-0 items-center justify-center text-white transition-opacity hover:opacity-80 rounded-none"
                         >
-                            <span className="material-symbols-outlined text-[24px]">arrow_back_ios</span>
+                            <ChevronLeft className="text-[24px]" />
                         </Link>
 
                         <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-10">
-                            Ubah Password
+                            {t.settings.password.title}
                         </h2>
                     </div>
                 </div>
@@ -41,14 +44,14 @@ export default function ChangePasswordPage() {
                         <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 space-y-5">
                             {/* Current Password */}
                             <div className="space-y-1.5">
-                                <label className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider ml-1">Password Saat Ini</label>
+                                <label className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider ml-1">{t.settings.password.currentPassword}</label>
                                 <div className="relative">
                                     <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-                                        <span className="material-symbols-outlined text-[20px]">lock</span>
+                                        <Lock  className="text-[20px]" />
                                     </div>
                                     <input
                                         type="password"
-                                        placeholder="Masukkan password lama"
+                                        placeholder={t.settings.password.placeholder.currentPassword}
                                         className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl py-3.5 pl-11 pr-4 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#137fec]/20 focus:border-[#137fec] transition-all placeholder:text-slate-400"
                                         required
                                     />
@@ -57,14 +60,14 @@ export default function ChangePasswordPage() {
 
                             {/* New Password */}
                             <div className="space-y-1.5">
-                                <label className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider ml-1">Password Baru</label>
+                                <label className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider ml-1">{t.settings.password.newPassword}</label>
                                 <div className="relative">
                                     <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-                                        <span className="material-symbols-outlined text-[20px]">key</span>
+                                      <Key className="text-[20px]" />
                                     </div>
                                     <input
                                         type="password"
-                                        placeholder="Masukkan password baru"
+                                        placeholder={t.settings.password.placeholder.newPassword}
                                         className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl py-3.5 pl-11 pr-4 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#137fec]/20 focus:border-[#137fec] transition-all placeholder:text-slate-400"
                                         required
                                     />
@@ -73,14 +76,14 @@ export default function ChangePasswordPage() {
 
                             {/* Confirm Password */}
                             <div className="space-y-1.5">
-                                <label className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider ml-1">Konfirmasi Password</label>
+                                <label className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider ml-1">{t.settings.password.confirmPassword}</label>
                                 <div className="relative">
                                     <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-                                        <span className="material-symbols-outlined text-[20px]">check_circle</span>
+                                        <CheckCircle className="text-[20px]" />
                                     </div>
                                     <input
                                         type="password"
-                                        placeholder="Ulangi password baru"
+                                        placeholder={t.settings.password.placeholder.confirmPassword}
                                         className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl py-3.5 pl-11 pr-4 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#137fec]/20 focus:border-[#137fec] transition-all placeholder:text-slate-400"
                                         required
                                     />
@@ -98,14 +101,11 @@ export default function ChangePasswordPage() {
                                     <div className="h-5 w-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                                 ) : (
                                     <>
-                                        <span className="material-symbols-outlined">save</span>
-                                        <span>Simpan Perubahan</span>
+                                        <Save className="text-[20px]" />
+                                        <span>{t.common.save}</span>
                                     </>
                                 )}
                             </button>
-                            <p className="text-center text-slate-400 dark:text-slate-500 text-xs">
-                                Pastikan password baru Anda kuat dan sulit ditebak.
-                            </p>
                         </div>
                     </form>
                 </main>

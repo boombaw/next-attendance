@@ -1,11 +1,13 @@
 "use client";
 
-import React from "react"; 
+import React from "react";
 import { useRouter } from "next/navigation";
+import { useLanguage } from "@/lib/context/language-context";
+import { Award, ChevronLeft, Mail, MapPin, Network, Smartphone } from "lucide-react";
 
 export default function PersonalInfoPage() {
     const router = useRouter();
-
+    const { t } = useLanguage();
     return (
         <div className="bg-[#f6f7f8] dark:bg-[#101922] min-h-screen">
             <div className="max-w-[430px] mx-auto min-h-screen bg-[#f6f7f8] dark:bg-[#101922] shadow-xl relative overflow-x-hidden">
@@ -16,12 +18,12 @@ export default function PersonalInfoPage() {
                             onClick={() => router.back()}
                             className="flex size-10 shrink-0 items-center justify-center text-white transition-opacity hover:opacity-80 rounded-none z-10"
                         >
-                            <span className="material-symbols-outlined text-[24px]">arrow_back_ios</span>
+                            <ChevronLeft />
                         </button>
 
                         <h2 className="absolute inset-0 flex items-center justify-center text-white dark:text-white text-lg font-bold leading-tight tracking-tight pointer-events-none">
-                            Informasi Personal
-                        </h2> 
+                            {t.profile.personal.title}
+                        </h2>
                     </div>
                 </header>
 
@@ -45,25 +47,25 @@ export default function PersonalInfoPage() {
 
                     {/* Section: Detail Pekerjaan */}
                     <div className="px-4">
-                        <h3 className="text-slate-900 dark:text-white text-sm font-bold uppercase tracking-wider px-2 pb-2 pt-4 opacity-60">Detail Pekerjaan</h3>
+                        <h3 className="text-slate-900 dark:text-white text-sm font-bold uppercase tracking-wider px-2 pb-2 pt-4 opacity-60">{t.profile.personal.detail.title}</h3>
                         <div className="bg-white dark:bg-slate-900 rounded-xl overflow-hidden divide-y divide-slate-100 dark:divide-slate-800 shadow-sm">
                             {/* Jabatan */}
                             <div className="flex items-center gap-4 px-4 min-h-[64px] py-2">
                                 <div className="text-[#137fec] flex items-center justify-center rounded-lg bg-[#137fec]/10 shrink-0 size-10">
-                                    <span className="material-symbols-outlined">badge</span>
+                                    <Award />
                                 </div>
                                 <div className="flex flex-col justify-center">
-                                    <p className="text-slate-500 dark:text-slate-400 text-xs font-medium leading-none mb-1">Jabatan</p>
+                                    <p className="text-slate-500 dark:text-slate-400 text-xs font-medium leading-none mb-1">{t.profile.personal.detail.position}</p>
                                     <p className="text-slate-900 dark:text-white text-base font-semibold leading-normal">Senior Staff</p>
                                 </div>
                             </div>
                             {/* Departemen */}
                             <div className="flex items-center gap-4 px-4 min-h-[64px] py-2">
                                 <div className="text-[#137fec] flex items-center justify-center rounded-lg bg-[#137fec]/10 shrink-0 size-10">
-                                    <span className="material-symbols-outlined">account_tree</span>
+                                    <Network />
                                 </div>
                                 <div className="flex flex-col justify-center">
-                                    <p className="text-slate-500 dark:text-slate-400 text-xs font-medium leading-none mb-1">Departemen</p>
+                                    <p className="text-slate-500 dark:text-slate-400 text-xs font-medium leading-none mb-1">{t.profile.personal.detail.department}</p>
                                     <p className="text-slate-900 dark:text-white text-base font-semibold leading-normal">IT Operations</p>
                                 </div>
                             </div>
@@ -72,35 +74,35 @@ export default function PersonalInfoPage() {
 
                     {/* Section: Kontak & Alamat */}
                     <div className="px-4 mt-6">
-                        <h3 className="text-slate-900 dark:text-white text-sm font-bold uppercase tracking-wider px-2 pb-2 pt-4 opacity-60">Kontak &amp; Alamat</h3>
+                        <h3 className="text-slate-900 dark:text-white text-sm font-bold uppercase tracking-wider px-2 pb-2 pt-4 opacity-60">{t.profile.personal.detail.address}</h3>
                         <div className="bg-white dark:bg-slate-900 rounded-xl overflow-hidden divide-y divide-slate-100 dark:divide-slate-800 shadow-sm">
                             {/* Email */}
                             <div className="flex items-center gap-4 px-4 min-h-[64px] py-2">
                                 <div className="text-[#137fec] flex items-center justify-center rounded-lg bg-[#137fec]/10 shrink-0 size-10">
-                                    <span className="material-symbols-outlined">mail</span>
+                                    <Mail />
                                 </div>
                                 <div className="flex flex-col justify-center">
-                                    <p className="text-slate-500 dark:text-slate-400 text-xs font-medium leading-none mb-1">Email</p>
+                                    <p className="text-slate-500 dark:text-slate-400 text-xs font-medium leading-none mb-1">{t.profile.personal.email}</p>
                                     <p className="text-slate-900 dark:text-white text-base font-semibold leading-normal">budi.santoso@company.com</p>
                                 </div>
                             </div>
                             {/* Nomor Telepon */}
                             <div className="flex items-center gap-4 px-4 min-h-[64px] py-2">
                                 <div className="text-[#137fec] flex items-center justify-center rounded-lg bg-[#137fec]/10 shrink-0 size-10">
-                                    <span className="material-symbols-outlined">phone_iphone</span>
+                                    <Smartphone />
                                 </div>
                                 <div className="flex flex-col justify-center">
-                                    <p className="text-slate-500 dark:text-slate-400 text-xs font-medium leading-none mb-1">Nomor Telepon</p>
+                                    <p className="text-slate-500 dark:text-slate-400 text-xs font-medium leading-none mb-1">{t.profile.personal.phone}</p>
                                     <p className="text-slate-900 dark:text-white text-base font-semibold leading-normal">0812-3456-7890</p>
                                 </div>
                             </div>
                             {/* Alamat */}
                             <div className="flex items-start gap-4 px-4 min-h-[72px] py-3">
                                 <div className="text-[#137fec] flex items-center justify-center rounded-lg bg-[#137fec]/10 shrink-0 size-10 mt-1">
-                                    <span className="material-symbols-outlined">location_on</span>
+                                    <MapPin />
                                 </div>
                                 <div className="flex flex-col justify-center">
-                                    <p className="text-slate-500 dark:text-slate-400 text-xs font-medium leading-none mb-1">Alamat</p>
+                                    <p className="text-slate-500 dark:text-slate-400 text-xs font-medium leading-none mb-1">{t.profile.personal.address}</p>
                                     <p className="text-slate-900 dark:text-white text-base font-semibold leading-snug">Jl. Merdeka No. 10, Jakarta Pusat, DKI Jakarta</p>
                                 </div>
                             </div>
@@ -108,9 +110,9 @@ export default function PersonalInfoPage() {
                     </div>
 
                     {/* Additional Detail Info */}
-                    <div className="px-4 mt-8"> 
+                    <div className="px-4 mt-8">
                         <p className="text-center text-slate-400 dark:text-slate-500 text-xs mt-4 px-8">
-                            Beberapa informasi dikunci oleh admin HR. Silakan informasikan kepada admin HR jika ingin mengubah data permanen.
+                            {t.profile.personal.note}
                         </p>
                     </div>
                 </main>

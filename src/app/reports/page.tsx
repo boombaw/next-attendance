@@ -31,8 +31,10 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useLanguage } from "@/lib/context/language-context";
 
 export default function ReportsPage() {
+    const {t} = useLanguage();
     // Mock Data
     const reportData = [
         {
@@ -124,17 +126,17 @@ export default function ReportsPage() {
                         {/* Page Header & Actions */}
                         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                             <div className="flex flex-col gap-1">
-                                <h2 className="text-3xl font-black tracking-tight text-gray-900 dark:text-white">Attendance Reports</h2>
-                                <p className="text-gray-500 dark:text-gray-400 text-base">View and export detailed attendance records for your team.</p>
+                                <h2 className="text-3xl font-black tracking-tight text-gray-900 dark:text-white">{t.attendanceReports.title}</h2>
+                                <p className="text-gray-500 dark:text-gray-400 text-base">{t.attendanceReports.admin.description}</p>
                             </div>
                             <div className="flex gap-3">
                                 <Button className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold shadow-sm gap-2">
                                     <FileText className="w-5 h-5" />
-                                    <span>Export to Excel</span>
+                                    <span>{t.common.exportToExcel}</span>
                                 </Button>
                                 <Button className="bg-primary hover:bg-blue-700 text-white font-bold shadow-sm gap-2">
                                     <Download className="w-5 h-5" />
-                                    <span>Export to PDF</span>
+                                    <span>{t.common.exportToPDF}</span>
                                 </Button>
                             </div>
                         </div>
@@ -143,10 +145,10 @@ export default function ReportsPage() {
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                             {/* Filters Section */}
                             <div className="lg:col-span-2 bg-white dark:bg-[#1a202c] rounded-xl border border-gray-200 dark:border-gray-800 p-5 shadow-sm">
-                                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 uppercase tracking-wider">Filters</h3>
+                                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 uppercase tracking-wider">{t.common.filter}</h3>
                                 <div className="flex flex-col md:flex-row gap-4 items-end">
                                     <div className="flex flex-col w-full md:w-1/3 gap-1.5">
-                                        <span className="text-sm font-medium text-gray-900 dark:text-white">Date Range</span>
+                                        <span className="text-sm font-medium text-gray-900 dark:text-white">{t.attendanceReports.admin.filter.range}</span>
                                         <div className="relative">
                                             <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                                             <Input
@@ -156,7 +158,7 @@ export default function ReportsPage() {
                                         </div>
                                     </div>
                                     <div className="flex flex-col w-full md:w-1/3 gap-1.5">
-                                        <span className="text-sm font-medium text-gray-900 dark:text-white">Department</span>
+                                        <span className="text-sm font-medium text-gray-900 dark:text-white">{t.attendanceReports.admin.filter.department}</span>
                                         <div className="relative">
                                             <Select>
                                                 <SelectTrigger className="pl-10 h-10 bg-white dark:bg-[#111621] border-gray-200 dark:border-gray-700 focus:ring-primary">
@@ -175,7 +177,7 @@ export default function ReportsPage() {
                                     </div>
                                     <div className="w-full md:w-auto">
                                         <Button className="w-full md:w-auto px-6 bg-[#111318] dark:bg-white text-white dark:text-[#111318] font-bold hover:opacity-90 transition-opacity">
-                                            Apply Filters
+                                            {t.attendanceReports.admin.filter.apply}
                                         </Button>
                                     </div>
                                 </div>
@@ -185,7 +187,7 @@ export default function ReportsPage() {
                             <div className="lg:col-span-1 grid grid-cols-2 gap-4">
                                 <div className="bg-white dark:bg-[#1a202c] rounded-xl border border-gray-200 dark:border-gray-800 p-5 shadow-sm flex flex-col justify-between">
                                     <div className="flex items-start justify-between">
-                                        <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">Total Man-Hours</span>
+                                        <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">{t.attendanceReports.admin.stats.totalWorkHours}</span>
                                         <div className="bg-primary/10 p-1 rounded-md text-primary">
                                             <Clock className="w-6 h-6" />
                                         </div>
@@ -194,7 +196,7 @@ export default function ReportsPage() {
                                         <p className="text-2xl font-bold text-gray-900 dark:text-white">1,240 <span className="text-sm font-normal text-gray-500">hrs</span></p>
                                         <p className="text-xs font-medium text-emerald-500 mt-1 flex items-center gap-0.5">
                                             <TrendingUp className="w-4 h-4" />
-                                            +12% vs last month
+                                            +12% vs {t.common.lastMonth}
                                         </p>
                                     </div>
                                 </div>
@@ -209,7 +211,7 @@ export default function ReportsPage() {
                                         <p className="text-2xl font-bold text-gray-900 dark:text-white">94%</p>
                                         <p className="text-xs font-medium text-emerald-500 mt-1 flex items-center gap-0.5">
                                             <TrendingUp className="w-4 h-4" />
-                                            +2% vs last month
+                                            +2% vs {t.common.lastMonth}
                                         </p>
                                     </div>
                                 </div>
@@ -219,21 +221,20 @@ export default function ReportsPage() {
                         {/* Detailed Table */}
                         <div className="bg-white dark:bg-[#1a202c] rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm flex flex-col overflow-hidden">
                             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800 flex justify-between items-center">
-                                <h2 className="text-lg font-bold text-gray-900 dark:text-white">Detailed Log</h2>
-                                <button className="text-sm text-primary font-medium hover:underline">View All History</button>
+                                <h2 className="text-lg font-bold text-gray-900 dark:text-white">{t.attendanceReports.admin.table.caption}</h2>
                             </div>
                             <div className="overflow-x-auto">
                                 <Table>
                                     <TableHeader>
                                         <TableRow className="bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-50 dark:hover:bg-gray-800/50 border-gray-200 dark:border-gray-800">
-                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">Employee Name</TableHead>
-                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">Department</TableHead>
-                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">Date</TableHead>
-                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">Clock In</TableHead>
-                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">Clock Out</TableHead>
-                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">Total Hours</TableHead>
-                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">Status</TableHead>
-                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium text-right whitespace-nowrap">Actions</TableHead>
+                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">{t.attendanceReports.admin.table.name}</TableHead>
+                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">{t.attendanceReports.admin.table.department}</TableHead>
+                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">{t.attendanceReports.admin.table.date}</TableHead>
+                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">{t.attendanceReports.admin.table.clockIn}</TableHead>
+                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">{t.attendanceReports.admin.table.clockOut}</TableHead>
+                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">{t.attendanceReports.admin.table.workHours}</TableHead>
+                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">{t.common.state}</TableHead>
+                                            <TableHead className="px-6 py-4 text-gray-500 dark:text-gray-400 font-medium text-right whitespace-nowrap">{t.common.actions}</TableHead>
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody className="divide-y divide-gray-200 dark:divide-gray-800">
@@ -274,18 +275,38 @@ export default function ReportsPage() {
                             </div>
 
                             {/* Pagination */}
-                            <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200 dark:border-gray-800">
-                                <p className="text-sm text-gray-500 dark:text-gray-400">Showing <span className="font-medium text-gray-900 dark:text-white">1</span> to <span className="font-medium text-gray-900 dark:text-white">5</span> of <span className="font-medium text-gray-900 dark:text-white">124</span> results</p>
+                            <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
+                                <p className="text-sm text-gray-500 dark:text-gray-400">
+                                    {t.common.pagination.showing}{" "}
+                                    <span className="font-medium text-gray-900 dark:text-white">
+                                        1
+                                    </span>{" "}
+                                    {t.common.pagination.to}{" "}
+                                    <span className="font-medium text-gray-900 dark:text-white">
+                                        5
+                                    </span>{" "}
+                                    {t.common.pagination.of}{" "}
+                                    <span className="font-medium text-gray-900 dark:text-white">
+                                        5
+                                    </span>{" "}
+                                    {t.attendanceReports.title}
+                                </p>
                                 <div className="flex gap-2">
-                                    <Button variant="outline" size="icon" className="h-8 w-8 text-gray-500 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
-                                        <ChevronLeft className="w-4 h-4" />
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        className="border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50"
+                                        disabled
+                                    >
+                                        {t.common.pagination.prev}
                                     </Button>
-                                    <Button className="h-8 w-8 bg-primary text-white border border-primary hover:bg-blue-700">1</Button>
-                                    <Button variant="outline" className="h-8 w-8 text-gray-500 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">2</Button>
-                                    <Button variant="outline" className="h-8 w-8 text-gray-500 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">3</Button>
-                                    <span className="flex items-center justify-center h-8 w-8 text-gray-500">...</span>
-                                    <Button variant="outline" size="icon" className="h-8 w-8 text-gray-500 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
-                                        <ChevronRight className="w-4 h-4" />
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        className="border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50"
+                                        disabled
+                                    >
+                                        {t.common.pagination.next}
                                     </Button>
                                 </div>
                             </div>
