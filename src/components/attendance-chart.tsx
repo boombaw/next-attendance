@@ -3,47 +3,151 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/context/language-context";
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Filler,
+    Legend,
+    ScriptableContext
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+import { useRef, useEffect, useState } from "react";
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Filler,
+    Legend
+);
 
 export function AttendanceChart() {
     const { t } = useLanguage();
-    const data = [
-        { day: "Mon", value: 118, height: "85%", fullHeight: "60%" },
-        { day: "Tue", value: 122, height: "92%", fullHeight: "75%" },
-        { day: "Wed", value: 125, height: "96%", fullHeight: "80%" },
-        { day: "Thu", value: 115, height: "88%", fullHeight: "65%" },
-        { day: "Fri", value: 110, height: "75%", fullHeight: "70%" },
-        { day: "Sat", value: 45, height: "30%", fullHeight: "40%", isWeekend: true },
-        { day: "Sun", value: 12, height: "10%", fullHeight: "30%", isWeekend: true },
-    ];
+    const chartRef = useRef<any>(null);
+    const [chartData, setChartData] = useState<any>({
+        datasets: [],
+    });
+
+    const labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const values = [142, 145, 148, 140, 135, 50, 15];
+
+    useEffect(() => {
+        const chart = chartRef.current;
+
+        if (!chart) {
+            return;
+        }
+
+        const createGradient = (ctx: CanvasRenderingContext2D) => {
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(59, 130, 246, 0.5)'); // Start color
+            gradient.addColorStop(1, 'rgba(59, 130, 246, 0.0)'); // End color
+            return gradient;
+        };
+
+        setChartData({
+            labels,
+            datasets: [
+                {
+                    fill: 'start', // Boundary fill
+                    label: 'Employees',
+                    data: values,
+                    borderColor: 'rgb(59, 130, 246)',
+                    backgroundColor: (context: ScriptableContext<"line">) => {
+                        const ctx = context.chart.ctx;
+                        return createGradient(ctx);
+                    },
+                    tension: 0.4, // Smooth curve
+                    pointRadius: 6,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: 'rgb(59, 130, 246)',
+                    pointBorderWidth: 3,
+                    pointHoverRadius: 8,
+                },
+            ],
+        });
+    }, []);
+
+    const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false,
+            },
+            tooltip: {
+                backgroundColor: 'rgb(15, 23, 42)',
+                titleColor: '#ffffff',
+                bodyColor: '#ffffff',
+                padding: 10,
+                cornerRadius: 8,
+                displayColors: false,
+                callbacks: {
+                    label: function (context: any) {
+                        return `${context.parsed.y} Employees`;
+                    }
+                }
+            }
+        },
+        scales: {
+            y: {
+                min: 0,
+                max: 160, // Slightly above max value
+                ticks: {
+                    stepSize: 40,
+                    callback: function (value: any) {
+                        return ((value / 160) * 100) + '%'; // Convert to percentage roughly
+                    },
+                    color: '#94a3b8',
+                    font: {
+                        size: 11
+                    }
+                },
+                grid: {
+                    color: '#e2e8f0',
+                    borderDash: [5, 5],
+                    drawBorder: false,
+                }
+            },
+            x: {
+                grid: {
+                    display: false,
+                },
+                ticks: {
+                    color: '#94a3b8',
+                    font: {
+                        size: 11,
+                        weight: 'bold' as const
+                    }
+                }
+            }
+        }
+    };
 
     return (
-        <div className="lg:col-span-3 bg-card p-6 rounded-xl shadow-sm border border-border">
-            <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-bold text-foreground">{t.dashboard.chart.title}</h3>
-                <Button variant="link" className="text-primary hover:text-primary/80 p-0 h-auto font-medium decoration-0">
-                    {t.dashboard.chart.viewReport} <ArrowRight className="ml-1 h-4 w-4" />
+        <div className="lg:col-span-3 bg-white dark:bg-card p-6 sm:p-10 rounded-3xl shadow-xl dark:shadow-2xl dark:shadow-blue-900/10 border border-gray-100 dark:border-gray-700/50 transition-all duration-300">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-4 sm:gap-0">
+                <div>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Ringkasan Absensi Mingguan</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 font-medium">Monitoring kehadiran karyawan 23 - 29 Okt</p>
+                </div>
+                <Button className="group bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-500/30 flex items-center gap-2 h-auto">
+                    <span>Lihat Laporan</span> <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
             </div>
 
-            <div className="w-full h-[240px] flex items-end justify-between gap-2 sm:gap-4 px-2">
-                {data.map((item, index) => (
-                    <div key={index} className="flex flex-col items-center gap-2 flex-1 group cursor-pointer">
-                        <div
-                            className="w-full max-w-[40px] bg-primary/20 group-hover:bg-primary/30 rounded-t-sm relative transition-all"
-                            style={{ height: item.fullHeight }}
-                        >
-                            <div
-                                className={`absolute bottom-0 left-0 w-full rounded-t-sm transition-all group-hover:h-[calc(100%+3%)] ${item.isWeekend ? "bg-primary/50" : "bg-primary"}`}
-                                style={{ height: item.height }}
-                            ></div>
-                            {/* Tooltip */}
-                            <div className="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded pointer-events-none transition-opacity whitespace-nowrap z-10">
-                                {item.value}
-                            </div>
-                        </div>
-                        <span className="text-xs font-medium text-muted-foreground">{item.day}</span>
-                    </div>
-                ))}
+            <div className="w-full relative h-80 sm:h-96 select-none">
+                <div className="w-full h-full relative z-10">
+                    <Line ref={chartRef} options={options} data={chartData} />
+                </div>
             </div>
         </div>
     );
